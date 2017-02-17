@@ -1,0 +1,13 @@
+#pole {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.textar {
+    position: absolute;
+    left: 640px;
+    top: 0;
+    height: 640px;
+    width: 320px;
+}
