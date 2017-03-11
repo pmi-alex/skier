@@ -3,16 +3,16 @@
     <meta charset="windows-1251">
     <title>SKIER</title>
     <link rel="stylesheet" href="style.css"/>
+    <style>body, html {margin: 0px; padding: 0px;}</style>
+    <script type="text/javascript" src="game_script.js"></script>
+    <script type="text/javascript" src="skier.js"></script>
+    <script type="text/javascript" src="generator.js"></script>
 </head>
-<body>
-    <div>
-        <img id="pole" src="pole.png">
-        <img id="skier" src="skier.png" style="position:absolute; left:0; top:0;">
-    </div>
+<body onload="init()">
+    <canvas id="mycanvas" width="640" height="640"></canvas>
     <div class="textar">
         <textarea rows="40" cols="40" name="text" id="ta"></textarea>
-        <input type="submit" value="Start!" onclick="" id="start">
+        <button onclick="start()">Start!</button>
     </div>
-    <script type="text/javascript" src="game_script.js"></script>
 </body>
 </html>

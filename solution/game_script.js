@@ -1,43 +1,37 @@
-function movebytext() {
-    var command = document.getElementById("ta").value;
-    var element = document.getElementById("skier");
+var context,
+    player,
+    currentCommand = 0,
+    listCommand = null,
+    map;
 
-    switch (command) {
-        case "up":
-            element.style.transform = 'rotate(' + 270 + 'deg)';
-            element.style.top = parseInt(element.style.top) - 32 + 'px';
-            if (element.style.top < 0 + 'px')
-                element.style.top = parseInt(element.style.top) + 32 + 'px';
-            break;
+function init() {
+    var canvas = document.getElementById("mycanvas");
+    context = canvas.getContext("2d");
+    map = generateMap();
+    player = new skier({x: 0, y: 0});
+    player.Draw(context);
+    setInterval(update, 300);
+}
 
-        case "down":
-            element.style.transform = 'rotate(' + 90 + 'deg)';
-            element.style.top = parseInt(element.style.top) + 32 + 'px';
-            if (element.style.top == 640 + 'px')
-                element.style.top = parseInt(element.style.top) - 32 + 'px';
-            break;
-
-        case "left":
-            element.style.transform = 'rotate(' + 180 + 'deg)';
-            element.style.left = parseInt(element.style.left) - 32 + 'px';
-            if (element.style.left < 0 + 'px')
-                element.style.left = parseInt(element.style.left) + 32 + 'px';
-            break;
-
-        case "right":
-            element.style.transform = 'rotate(' + 360 + 'deg)';
-            element.style.left = parseInt(element.style.left) + 32 + 'px';
-            if (element.style.left == 640 + 'px')
-                element.style.left = parseInt(element.style.left) - 32 + 'px';
-            break;
-        //case ...
+function update() {
+    context.fillStyle = 'white';
+    context.fillRect(0, 0, 640, 640);
+    player.Draw(context);
+    if (listCommand != null) {
+        if(currentCommand < listCommand.length) {
+            player.DoCommand(listCommand[currentCommand]);
+            currentCommand++;
+        }
+        else {
+            currentCommand = 0;
+            listCommand = [];
+        }
     }
 }
 
-var st = document.getElementById("start")
-st.onclick = function() {
-    movebytext();
+function start() {
+    listCommand = document.getElementById("ta").value.split(";\n"); //enter in the end
 }
 
-//построчное считывание команд, string == last value
+//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ, string == last value
 //map generator: https://ru.wikipedia.org/wiki/%D0%9F%D0%BE%D0%B8%D1%81%D0%BA_%D0%BF%D1%83%D1%82%D0%B8
